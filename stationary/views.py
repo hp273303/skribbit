@@ -13,7 +13,7 @@ def addtocart(request):
     return render(request, 'addtocart.html')
 
 def Ball_Pens(request):
-    api_url = "http://192.168.1.34:8000/getproductdata/"
+    api_url = "http://192.168.1.44:9000/getproductdata/"
     print (api_url)
     
     try:
@@ -33,17 +33,8 @@ def Ball_Pens(request):
         return render(request, 'error_template.html', {'error_message': str(e)})
 
 def contact(request):
-    return render(request, 'contact.html')
-
-def Erasers(request):
-    return render(request, 'Erasers.html')
-
-def Folders_Fillings(request):
-    return render(request, 'Folders_Fillings.html')
-
-def pen_fountain(request):
-    api_url = "http://192.168.1.34:8000/getproductdata/"
-    print(api_url)
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
     
     try:
         # Fetch data from the API
@@ -51,8 +42,48 @@ def pen_fountain(request):
         if response.status_code == 200:
             # Convert the response to JSON
             data = response.json()
+            print(data)
+            pencils_data = [item for item in data if item.get('product_name') == 'Pencils' and item.get('product_category') == 'Pencil']
+            print(pencils_data)
+
+            return render(request, 'contact.html', {'data': pencils_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
+def Erasers(request):
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
             
-            # Filter data for items with product name "Pen" and category "Ball Pen"
+            Erasers_data = [item for item in data if item.get('product_name') == 'Erasers' and item.get('product_category') == 'Erasers']
+            print(Erasers_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': Erasers_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
+def Folders_Fillings(request):
+    return render(request, 'Folders_Fillings.html')
+
+def pen_fountain(request):
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print(api_url)
+    try:
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            data = response.json()
+            
             pens_data = [item for item in data if item.get('product_name') == 'Pens' and item.get('product_category') == 'Gel Pens']
             print(pens_data)
 
@@ -66,19 +97,16 @@ def pen_fountain(request):
 
 
 def Gel_Pens(request):
-    api_url = "http://192.168.1.34:8000/getproductdata/"
-    
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
     try:
         # Fetch data from the API
         response = requests.get(api_url)
         if response.status_code == 200:
             # Convert the response to JSON
             data = response.json()
-            
-            # Filter data for items with product name "Pen" and category "Ball Pen"
             pens_data = [item for item in data if item.get('product_name') == 'Pens' and item.get('product_category') == 'Gel Pens']
             print(pens_data)
-
 
             return render(request, 'Gel_Pens.html', {'data': pens_data})
         else:
@@ -87,17 +115,104 @@ def Gel_Pens(request):
     except Exception as e:
         return render(request, 'error_template.html', {'error_message': str(e)})
 
+
+def Gel_Pen(request):
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
+    try:
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            # Convert the response to JSON
+            data = response.json()
+            pens_data = [item for item in data if item.get('product_name') == 'Pens' and item.get('product_category') == 'Gel Pens']
+            print(pens_data)
+
+            return render(request, 'gel.html', {'data': pens_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
 def highlighter(request):
-    return render(request, 'highlighter.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
+    try:
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            # Convert the response to JSON
+            data = response.json()
+            Highlighters_data = [item for item in data if item.get('product_name') == 'Highlighters' and item.get('product_category') == 'Highlighters']
+            print(Highlighters_data)
+
+            return render(request, 'highlighter.html', {'data': Highlighters_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
 
 def Memo_Blocks(request):
-    return render(request, 'Memo_Blocks.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            
+            Memo_Blocks_data = [item for item in data if item.get('product_name') == 'Memo Blocks' and item.get('product_category') == 'Memo Blocks']
+            print(Memo_Blocks_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': Memo_Blocks_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
 
 def notebooks(request):
-    return render(request, 'notebooks.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
+    try:
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            # Convert the response to JSON
+            data = response.json()
+            notebooks_data = [item for item in data if item.get('product_name') == 'Notebooks' and item.get('product_category') == 'Notebooks']
+            print(notebooks_data)
+
+            return render(request, 'notebooks.html', {'data': notebooks_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
 
 def notepads(request):
-    return render(request, 'notepads.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    print (api_url)
+    try:
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            # Convert the response to JSON
+            data = response.json()
+            notepads_data = [item for item in data if item.get('product_name') == 'Notepads' and item.get('product_category') == 'notebooks']
+            print(notepads_data)
+
+            return render(request, 'notepads.html', {'data': notepads_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
 
 def organizers(request):
     return render(request, 'organizers.html')
@@ -106,20 +221,36 @@ def Paperclips(request):
     return render(request, 'Paperclips.html')
 
 def Premium_Gel_Pens(request):
-    return render(request, 'Premium_Gel_Pens.html')
-
-def Roller_Ball_Pens(request):
-    api_url = "http://192.168.1.34:8000/getproductdata/"
+    api_url = "http://192.168.1.44:9000/getproductdata/"
     
     try:
-        # Fetch data from the API
         response = requests.get(api_url)
+        
         if response.status_code == 200:
-            # Convert the response to JSON
             data = response.json()
             print(data)
             
-            # Filter data for items with product name "Pen" and category "Ball Pen"
+            pens_data = [item for item in data if item.get('product_name') == 'Pens' and item.get('product_category') == 'Roller Ball Pens']
+            print(pens_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': pens_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
+
+def Roller_Ball_Pens(request):
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            
             pens_data = [item for item in data if item.get('product_name') == 'Pens' and item.get('product_category') == 'Roller Ball Pens']
             print(pens_data)
 
@@ -132,16 +263,68 @@ def Roller_Ball_Pens(request):
 
 
 def Shopners(request):
-    return render(request, 'Sharpener.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            
+            Sharpeners_data = [item for item in data if item.get('product_name') == 'Sharpeners' and item.get('product_category') == 'Sharpeners']
+            print(Sharpeners_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': Sharpeners_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
+
 
 def Staplers(request):
     return render(request, 'Staplers.html')
 
 def Sticky_Notes(request):
-    return render(request, 'Sticky_Notes.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            
+            Sticky_Notes_data = [item for item in data if item.get('product_name') == 'Sticky Notes' and item.get('product_category') == 'Sticky Notes']
+            print(Sticky_Notes_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': Sticky_Notes_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
 
 def todolist(request):
-    return render(request, 'To-do_list.html')
+    api_url = "http://192.168.1.44:9000/getproductdata/"
+    
+    try:
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            
+            To_Do_List_data = [item for item in data if item.get('product_name') == 'To Do List' and item.get('product_category') == 'To Do List']
+            print(To_Do_List_data)
+
+            return render(request, 'Roller_Ball_Pens.html', {'data': To_Do_List_data})
+        else:
+
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
 
 
 def aboutus(request):
@@ -291,32 +474,32 @@ def register(request):
 
 import requests
 from django.shortcuts import render
-# def getproduct(request):
-#     api_url = "http://192.168.1.36:7000/getproductdata/"zz
+def getproduct(request):
+    api_url = "http://192.168.1.44:9000/getproductdata/"
     
-#     try:
-#         # Fetch data from the API
-#         response = requests.get(api_url)
-#         if response.status_code == 200:
-#             # Convert the response to JSON
-#             data = response.json()
+    try:
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            # Convert the response to JSON
+            data = response.json()
             
-#             # Filter data for items with product name "Pens"
-#             pens_data = [item for item in data if item.get('product_name') == 'Pens']
+            # Filter data for items with product name "Pens"
+            pens_data = [item for item in data if item.get('product_name') == 'Pens']
         
             
-#             # Pass the filtered data to the template
-#             return render(request, 'data_template.html', {'data': pens_data})
-#         else:
-#             # If there's an error in fetching data, return an error message
-#             return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
-#     except Exception as e:
-#         return render(request, 'error_template.html', {'error_message': str(e)})]
+            # Pass the filtered data to the template
+            return render(request, 'data_template.html', {'data': pens_data})
+        else:
+            # If there's an error in fetching data, return an error message
+            return render(request, 'error_template.html', {'error_message': 'Failed to fetch data from the API.'})
+    except Exception as e:
+        return render(request, 'error_template.html', {'error_message': str(e)})
 
 import requests
 
 def getproduct(request):
-    api_url = "http://192.168.1.56:8000/getproductdata/"
+    api_url = "http://192.168.1.44:9000/getproductdata/"
     
     try:
         # Fetch data from the API
@@ -340,104 +523,48 @@ def getproduct(request):
 
 import requests
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 
-def register(request):
+def register_with_api(request):
     if request.method == 'POST':
-        # Retrieve data from the form
+        api_url = 'http://192.168.1.45:9000/register/'
+
+        # Validate form data
         username = request.POST.get('username')
         name = request.POST.get('name')
         email = request.POST.get('email')
-        phone = request.POST.get('phone')
+        phone = request.POST.get('phone', '')  # Optional field
         password = request.POST.get('password')
-        image = request.FILES.get('image')
 
-        # Prepare data to send to the API
-        data = {
+        if not (username and name and email and password):
+            return JsonResponse({'error': 'Missing required fields'})
+
+        # Sanitize input
+        username = username.strip()
+        name = name.strip()
+        email = email.strip()
+        phone = phone.strip()
+
+        user_data = {
             'username': username,
             'name': name,
             'email': email,
             'phone': phone,
             'password': password,
-            'image': image,
         }
-        
-        response = requests.post('http://192.168.1.34:9000/register/', data=data)
 
-        print(response.text)
+        try:
+            response = requests.post(api_url, data=user_data)
 
-        return HttpResponse("Registration successful!")  # Assuming registration is successful
-
-    elif request.method == 'GET':
-        return render(request, 'registeration.html')
-
+            if response.status_code == 200:
+                return JsonResponse({'message': 'Registration successful'})
+            else:
+                # Registration failed, provide more details about the error
+                error_message = f"Registration failed with status code {response.status_code}."
+                if response.text:
+                    error_message += f" Response from server: {response.text}"
+                return JsonResponse({'error': error_message})
+        except requests.exceptions.RequestException as e:
+            return JsonResponse({'error': f"Failed to connect to API server: {str(e)}"})
     else:
-        return HttpResponse(status=405)  # Method Not Allowed for other request methods
-# views.py
-# views.py
-# views.py
-
-
-
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from django.views.decorators.http import require_POST
-# import requests
-# # views.py
-# # views.py
-
-# from django.shortcuts import render
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from django.views.decorators.http import require_POST
-# import requests
-# # views.py
-
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from django.views.decorators.http import require_POST
-# import requests
-
-# @csrf_exempt
-# @require_POST
-# def register(request):
-#     if request.method == 'POST':
-#         # Extract registration data from POST request
-#         username = request.POST.get('username')
-#         name = request.POST.get('name')
-#         email = request.POST.get('email')
-#         phone = request.POST.get('phone')
-#         password = request.POST.get('password')
-#         image = request.FILES.get('image')  # Assuming image is uploaded as a file
-
-#         # Prepare the data to be sent to the external API
-#         registration_data = {
-#             'username': username,
-#             'name': name,
-#             'email': email,
-#             'phone': phone,
-#             'password': password,
-#             # 'image': image  # Assuming image is uploaded as a file
-#             # Ensure the 'image' key is removed if not needed by the API
-#         }
-
-#         # API endpoint where you want to save the registration data
-#         api_url = 'http://192.168.1.35:9000/register/'
-
-#         try:
-#             # Send a POST request to the API endpoint with registration data
-#             response = requests.post(api_url, data=registration_data)
-
-#             # Check if the request was successful
-#             if response.status_code == 200:
-#                 # Registration successful
-#                 return JsonResponse({'message': 'Registration successful'})
-#             else:
-#                 # Registration failed
-#                 return JsonResponse({'error': 'Failed to register'}, status=400)
-#         except Exception as e:
-#             # Handle exceptions, such as connection errors, timeout, etc.
-#             return JsonResponse({'error': str(e)}, status=500)
-
-#     # Return an error if the request method is not POST
-#     return JsonResponse({'error': 'Method not allowed'}, status=405)
+        return render(request, 'registration_form.html')

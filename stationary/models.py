@@ -1,4 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class User(AbstractUser):
+    pass
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -22,11 +30,6 @@ class TransactionItem(models.Model):
     def __str__(self):
         return f"{self.quantity} {self.product} - ${self.total()}"
     
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-
-class User(AbstractUser):
-    pass
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

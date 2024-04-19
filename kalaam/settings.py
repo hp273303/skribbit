@@ -76,6 +76,13 @@ TEMPLATES = [
 ]
 
 
+
+AUTH_USER_MODEL = 'stationary.User'
+
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
+
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 

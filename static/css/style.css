@@ -1154,7 +1154,7 @@ h6 {
 
 .product-item {
   margin-bottom: 20px;
-  display: flex;
+  display: inherit;
 }
 
 .product-item{
@@ -1277,7 +1277,7 @@ tr:hover {
 }
 
 .product_get{
-  display: flex;
+  display: inherit;
 }
 
 .product-container {
@@ -1289,10 +1289,12 @@ tr:hover {
   margin-left: 12rem;
   width: 65rem;
   height: 12.5rem;
+  display: inherit;
+  position: static;
 }
 
 .product_get {
-  display: flex;
+  display: inherit;
 }
 
 .product-image {
@@ -1301,12 +1303,14 @@ tr:hover {
   margin-right: 20px;
   max-width: 138px;
   max-height: 179px;
+  display: inherit;
 }
 
 .product-info {
   margin: 0;
   font-size: 18px;
   line-height: 1.5;
+  display: inherit;
 }
 
 /* Optional: If you want to add more styling */
